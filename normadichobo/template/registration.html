@@ -8,18 +8,20 @@
     <title>REGESTRATION</title>
 </head>
 <body background="{%static 'pexels.jpg' %}"><center>
+    <h2>REGISTRATION</h2>
 
     <div style="background-color:rgba(255, 255, 255, 0.575);width: 400px;height:500px;margin-top:100px;">
 
         <h2 style="padding-top:20px">Login Page</h2>
-
-        <input type ="text" placeholder="Username" style= "width:240px;height:35px; margin:10px ;padding-left:10px " required><br>
-        <input type ="text" placeholder="Firstname" style= "width:240px;height:35px; margin:10px ;padding-left:10px " required><br>
-        <input type ="text" placeholder="Lastname" style= "width:240px;height:35px; margin:10px ;padding-left:10px " required><br>
-        <input type ="text" placeholder="Email" style= "width:240px;height:35px; margin:10px ;padding-left:10px " required><br>
-        <input type="password" placeholder="Password"  style="width:240px;height:35px;margin:10px;padding-left:10px" required><br>
-        <input type="password" placeholder="Password"  style="width:240px;height:35px;margin:10px;padding-left:10px" required><br><br>
+        <form action="registersub">
+        <input type ="text" name="uname" placeholder="Username" style= "width:240px;height:35px; margin:10px ;padding-left:10px " required><br>
+        <input type ="text" name="fname" placeholder="Firstname" style= "width:240px;height:35px; margin:10px ;padding-left:10px " required><br>
+        <input type ="text" name="lname" placeholder="Lastname" style= "width:240px;height:35px; margin:10px ;padding-left:10px " required><br>
+        <input type ="text" name="email" placeholder="Email" style= "width:240px;height:35px; margin:10px ;padding-left:10px " required><br>
+        <input type="password" name="pname" placeholder="Password"  style="width:240px;height:35px;margin:10px;padding-left:10px" required><br>
+        <input type="password"name="p2name" placeholder="Re-enter Password"  style="width:240px;height:35px;margin:10px;padding-left:10px" required><br><br>
         <button type="submit" style="width:240px;height:30px;background-color:#343a40">Submit</button><br><br>
+        </form>
     </div>
 </center>
     
