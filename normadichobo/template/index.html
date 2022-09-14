@@ -279,13 +279,13 @@
                 
             
                     
-            {% for i in "helllo" %}  
+            {% for i in da %}  
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="destination-item position-relative overflow-hidden mb-2">
-                        <img class="img-fluid" src="{% static 'img/destination-6.jpg' %}" alt="">
+                        <img class="img-fluid" src="{{i.img}}" alt="">
                         <a class="destination-overlay text-white text-decoration-none" href="">
-                            <h5 class="text-white">Indonesia</h5>
-                            <span>100 Cities</span>
+                            <h5 class="text-white">{{i.name}}</h5>
+                            <span>{{i.cost}}</span>
                         </a>
                     </div>
                 </div>
