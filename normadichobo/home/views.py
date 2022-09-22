@@ -1,11 +1,13 @@
 
 from http.client import HTTPResponse
+from urllib import request
+from wsgiref.util import request_uri
 from django.shortcuts import render,redirect
 from home.models import product
 
 
 from product.models import Destinations
-
+from django.contrib.auth.models import User,auth
 
 
 
@@ -19,11 +21,30 @@ def index(request):
 
 def content(product):
     cont="p1"
-    return render(product,'registration.html',{'uk':pro})
+    if request.method=='POST':
+        uname=request.POST['uname']
+        fname=request.POST['fname']
+        lname=request.POST['lname']
+        name=request.POST['lnmae']
+        email=request.POST['email']
+        pname=request.POST['pname']
+        p2name=request.POST['p2name']
+        ucheck=User.objects.filter(username=uname)
+        echeck=User.objects.filter(ename=email)
+        if ucheck:
+            msg="username is already existed"
+    
+            return render (request,'registration.html')
+        elif echeck:
+            msg="email is already existed"
+            return render (request,'registration.html')
+        elif pname!=p2name:
+            msg="password is incorrect"
+            return render (request,'registration.html')
+
 
 def login(request):
     return render (request,'login.html')
-
 def registration(request):
     return render (request,'registration.html')
 
