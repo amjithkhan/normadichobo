@@ -102,7 +102,7 @@
                 </button>
                 <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
                     <div class="navbar-nav ml-auto py-0">
-                        <a href="index.html" class="nav-item nav-link">Home</a>
+                        <a href="{% url 'homepage' %}" class="nav-item nav-link">Home</a>
                         <a href="about.html" class="nav-item nav-link">About</a>
                         <a href="service.html" class="nav-item nav-link">Services</a>
                         <a href="package.html" class="nav-item nav-link">Tour Packages</a>
@@ -229,16 +229,13 @@
                     <div class="bg-white" style="padding: 30px; margin-bottom: 30px;">
                         <h4 class="text-uppercase mb-4" style="letter-spacing: 5px;"> Comments</h4>
                         <div class="message-box">
-                            <p>arjun <b>good product </b><small>22/05/2022</small></p>
-                            <p>arjun <b>good product </b><small>22/05/2022</small></p>
-                            <p>arjun <b>good product </b><small>22/05/2022</small></p>
-                            <p>arjun <b>good product </b><small>22/05/2022</small></p>
-                            <p>arjun <b>good product </b><small>22/05/2022</small></p>
-                            <p>arjun <b>good product </b><small>22/05/2022</small></p>
-                            <p>arjun <b>good product </b><small>22/05/2022</small></p>
-                            <p>arjun <b>good product </b><small>22/05/2022</small></p>
-                            <p>arjun <b>good product </b><small>22/05/2022</small></p>
-                            <p>arjun <b>good product </b><small>22/05/2022</small></p>
+                            
+
+                               {% for c in cmt %}
+                               <p>{{c.name}} <b>{{c.cmt}}</b> </b><small>{{c.data}}</small></p>
+                               {% endfor %}
+
+                         
                            
                         </div>
                         
@@ -249,12 +246,19 @@
                     <!-- Comment Form Start -->
                     <div class="bg-white mb-3" style="padding: 30px;">
                         <h4 class="text-uppercase mb-4" style="letter-spacing: 5px;">Leave a comment</h4>
-                        <form>
-                            
+                        <form action="{% url 'comment' %}">
+                            {% if user.is_authenticated %}
                             <div class="form-group">
                                 <label for="message">Message *</label>
-                                <textarea id="message" cols="30" rows="5" class="form-control"></textarea>
+                                <textarea name="msg" id="message" cols="30" rows="5" class="form-control"></textarea>
+                            <input type="hidden" name="pro_id" value="{{pro.id}}">
+                            
+ 
+
+                            <input type="hidden" name="user" value="{{user.username}}" >
                             </div>
+                            {% endif %}
+            
                             <div class="form-group mb-0">
                                 <input type="submit" value="Leave a comment"
                                     class="btn btn-primary font-weight-semi-bold py-2 px-3">

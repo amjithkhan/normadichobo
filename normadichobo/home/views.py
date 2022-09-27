@@ -44,9 +44,53 @@ def content(product):
 
 
 def login(request):
-    return render (request,'login.html')
+    if request.method=="POST":
+        uname=request.POST['uname']
+        pname=request.POST['pname']
+        user=auth.authenticate(username=uname,password=pname)
+        if user is not None:
+           auth.login(request,user)
+           return redirect('/')
+        else:
+           return render (request,'test.html',{'key1':'invalid username and password'})
+
+    else:
+        
+       return render (request,'login.html')
+
+
+
+
 def registration(request):
-    return render (request,'registration.html')
+    if request.method=="POST":
+
+       fname=request.POST['fname']
+       lname=request.POST['lname']
+       uname=request.POST['uname']
+       ename=request.POST['email']
+       pname=request.POST['pname']
+       p2name=request.POST['p2name']
+       ucheck=User.objects.filter(username=uname)
+       echeck=User.objects.filter(email=ename)
+       if ucheck:
+          return render(request,'test.html',{'msg':'username is already taken'})
+       elif echeck: 
+          return render(request,'test.html',{'msg':'email is already taken'})
+       elif pname != p2name:
+          return render(request,'test.html',{'msg':'incorrect password'})
+       else:
+          user=User.objects.create_user(username=uname,first_name=fname,last_name=lname,email=ename,password=pname)
+          user.save();
+          return redirect('/')
+    else:
+
+
+        return render (request,'registration.html')
+
+def logout(request):
+    auth.logout(request)
+    return redirect('/')
+
 
 
 def loginsub(request):
@@ -61,12 +105,12 @@ def loginsub(request):
         
         
 def registersub(request):
-    uname=request.GET['uname']
-    fname=request.GET['fname']
-    lname=request.GET['lname']
-    ename=request.GET['email']
-    pname=request.GET['pname']
-    p2name=request.GET['p2name']
+    fname=request.POST['fname']
+    lname=request.POST['lname']
+    uname=request.POST['uname']
+    ename=request.POST['email']
+    pname=request.POST['pname']
+    p2name=request.POST['p2name']
     ucheck=User.objects.filter(username=uname)
     echeck=User.objects.filter(email=ename)
     if ucheck:
@@ -78,6 +122,10 @@ def registersub(request):
     else:
         user=User.objects.create_user(username=uname,first_name=fname,last_name=lname,email=ename,password=pname)
         user.save();
+    
+def comment(request):
+    
+
         return redirect('/')
 
 

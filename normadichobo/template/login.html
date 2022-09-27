@@ -12,7 +12,8 @@
     <div style="background-color:rgba(128, 128, 128, 0.418);width: 400px;height:300px;margin-top:100px;border-radius:10px">
 
         <h2 style="padding-top:20px">Login Page</h2>
-        <form action="Loginsub">
+        <form action="{% url 'loginpage' %}" method="post">
+            {% csrf_token %}
         <input type ="text" name="uname" placeholder="Username" style= "width:240px;height:35px; margin:10px ;padding-left:10px " required><br>
         <input type="password" name="pname" placeholder="Password"  style="width:240px;height:35px;margin:10px;padding-left:10px" required><br><br>
         <button type="submit" style="width:240px;height:30px;background-color:#343a40">Submit</button><br><br>
