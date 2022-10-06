@@ -4,6 +4,7 @@ from urllib import request
 from wsgiref.util import request_uri
 from django.shortcuts import render,redirect
 from home.models import product
+from django.http import JsonResponse
 
 
 from product.models import Destinations
@@ -12,8 +13,13 @@ from django.contrib.auth.models import User,auth
 
 
 def index(request):
-    data=Destinations.objects.all()
-    d=data
+    if request.method=='POST':
+        val=request.POST['srh']
+        data=Destinations.objects.filter(name__istartswith=val)
+    else:
+        
+        data=Destinations.objects.all()
+        d=data
 
 
 

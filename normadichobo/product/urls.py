@@ -8,5 +8,5 @@ urlpatterns=[
 
     path('',views.details,name="detail_page"),
     path('cmt/',views.commenting,name="comment"),
-    
+    path('search/',views.searching,name="searching"),
     ]

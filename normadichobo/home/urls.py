@@ -3,13 +3,13 @@ from.import views
 
 urlpatterns = [
     
-    path('', views.index,name='homepage'),
+    path('', views.index,name='Homepage'),
     path('testing/', views.content),
     path('login/', views.login,name='loginpage'),
     path('registration/', views.registration,name='registration_page'),
     path('login/Loginsub/',views.loginsub),
-    path('Loginsub/',views.loginsub),
-    path('registration/registersub',views.registersub),
+    
+    
     path('logout/', views.logout),
 
 ]

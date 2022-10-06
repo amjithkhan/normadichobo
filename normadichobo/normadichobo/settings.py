@@ -10,6 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+from email.policy import default
+from http import client
 from msilib.schema import Media
 from pathlib import Path
 
@@ -84,6 +86,21 @@ DATABASES = {
         'USER':'root',
         'PASSWORD':'Code#_2126@R',
         'HOST':'localhost',
+    }
+}
+
+
+CASH_TTL=60*1500
+CACHE={
+    'default':{
+        'BACKEND':'django_redis.cash.RadisCashe',
+        'LOCATION':'radis ://127.0.0.1:6379/1',
+        'OPTIONS':{
+            'CLIENT_CLASS':'django_redis.client.DefaultClient',
+
+        },
+        'KEY_PREFIX':'example',
+
     }
 }
 
