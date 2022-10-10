@@ -1,5 +1,7 @@
 
+from http import cookies
 from http.client import HTTPResponse
+from tokenize import cookie_re
 from urllib import request
 from wsgiref.util import request_uri
 from django.shortcuts import render,redirect
@@ -13,6 +15,14 @@ from django.contrib.auth.models import User,auth
 
 
 def index(request):
+    #cookies viewing
+    if 'name' in request.COOKIES:
+        msg=request.COOKIES['name']
+    else:
+        msg="What say our clients"   
+
+    #serching
+
     if request.method=='POST':
         val=request.POST['srh']
         data=Destinations.objects.filter(name__istartswith=val)
@@ -23,7 +33,7 @@ def index(request):
 
 
 
-    return render(request,'index.html',{'da':data})
+    return render(request,'index.html',{'da':data,'msg':msg})
 
 def content(product):
     cont="p1"
@@ -56,9 +66,11 @@ def login(request):
         user=auth.authenticate(username=uname,password=pname)
         if user is not None:
            auth.login(request,user)
-           return redirect('/')
+           res=redirect('/')
+           res.set_cookie("name",uname)
+           return res
         else:
-           return render (request,'test.html',{'key1':'invalid username and password'})
+           return render (request,'login.html',{'key1':'invalid username and password'})
 
     else:
         
@@ -95,7 +107,9 @@ def registration(request):
 
 def logout(request):
     auth.logout(request)
-    return redirect('/')
+    res=redirect('/')
+    res.delete_cookie('name')
+    return res
 
 
 

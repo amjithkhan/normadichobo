@@ -19,7 +19,10 @@ def details(request):
         cache.set(id,pro)
         print("data from database")
     cmt=comment.objects.filter(place_id=id)#for comments loading 
-    return render(request,'single.html',{'pro':pro,'cmt':cmt})
+    print(pro)
+    res=render(request,'single.html',{'pro':pro,'cmt':cmt})
+    res.set_cookie('pro_name',pro.name)
+    return res
 
 def commenting(request):
     name=request.GET["user"]
