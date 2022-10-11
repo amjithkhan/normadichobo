@@ -1,8 +1,11 @@
 from pydoc import describe
+from tkinter import Place
 
 from urllib import request
 
 from django.shortcuts import render
+
+
 
 from .models import Destinations,comment
 
@@ -24,6 +27,7 @@ def details(request):
     res.set_cookie('pro_name',pro.name)
     return res
 
+
 def commenting(request):
     name=request.GET["user"]
     msg=request.GET["msg"]
@@ -38,3 +42,32 @@ def searching(request):
     print(obj)
 
     return render(request,'test.html',{'srh':val})
+
+
+def details2(request):
+    id=request.GET['id']
+    pro=Destinations.objects.get(id=id)
+
+
+    if "recent" in request.session:
+        
+        if id in request.session["recent"]: 
+            request.session["recent"].remove(id)#removing repeating product
+
+
+        request.session['recent'].insert(0,id)
+        if len(request.session["recent"])>4:
+            request.session["recent"].pop()
+        print(request.session['recent'])
+        place=Destinations.objects.filter(id__in=request.session['recent'])
+        print(place)
+
+ 
+    else:
+        request.session["recent"]=[id]
+        place=Destinations.objects.filter(id=id)
+    request.session.modified=True      #session modification
+
+    cmt=comment.objects.filter(place_id=id)
+
+    return render(request,'single.html',{'pro':pro,'cmt':cmt,'place':place})

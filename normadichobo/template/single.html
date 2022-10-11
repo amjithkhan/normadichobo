@@ -225,6 +225,20 @@
                     </div>
                     <!-- Blog Detail End -->
     
+
+                    <!--session field start -->
+                    <div class="bg-white" mb-3 style="padding: 30px; margin-bottom: 30px;">
+                        <h2>previous view</h2>
+                        {% for i in place %}
+                        <img src="{{ i.img.url }}" width="150px" height="150px" style="border-radius:50%; margin:7px">
+                        {%endfor%}
+                        
+                        
+                        
+                    </div>
+                    <!--session field end -->
+
+
                     <!-- Comment List Start -->
                     <div class="bg-white" style="padding: 30px; margin-bottom: 30px;">
                         <h4 class="text-uppercase mb-4" style="letter-spacing: 5px;"> Comments</h4>
