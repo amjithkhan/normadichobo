@@ -1,5 +1,7 @@
 from django.urls import path
 from.import views
+from.feed import latestfeed
+
 
 urlpatterns = [
     
@@ -8,8 +10,9 @@ urlpatterns = [
     path('login/', views.login,name='loginpage'),
     path('registration/', views.registration,name='registration_page'),
     path('login/Loginsub/',views.loginsub),
-    
+    path('feed/',latestfeed()),
     
     path('logout/', views.logout),
+
 
 ]
